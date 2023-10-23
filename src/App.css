@@ -36,3 +36,215 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+  background-color: pink;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1; /* 
+}
+
+.logo {
+  font-size: 1.5em;
+  color: white; /* Adjust the color of your logo text */
+}
+
+nav ul {
+  list-style: none;
+  display: inline-flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: rgb(160, 17, 77); /* Adjust the color of your nav links */
+  font-weight: bold;
+}
+
+.user-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: rgb(160, 17, 77); /* Adjust the color of your user links */
+}
+
+/* Hover effect for links */
+nav a:hover, .user-links a:hover {
+  text-decoration: underline;
+}
+
+.logo-img {
+  width: 50px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Add this to your existing CSS or create a new CSS file for button styles */
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px; /* Adjust the border-radius to make it more or less round */
+  background-color: rgb(160, 17, 77); /* You can change the background color */
+  color: pink; /* Text color */
+  border: 2px solid pink; /* Border color and thickness */
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.button:hover {
+  background-color: rgb(50, 139, 234); /* Adjust hover background color */
+  color: white; /* Adjust hover text color */
+  transform: scale(1.05); /* Adjust the scale for a slight zoom effect */
+}
+
+
+.landing-page {
+  position: relative;
+  text-align: center;
+}
+
+.landing-page img {
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  transform: translate(-50%, -10%);
+  color: rgb(27, 32, 178);
+}
+
+.content h1 {
+  font-size: 3em;
+}
+
+.content p {
+  font-size: 1.5em;
+  /* margin-bottom: 20px; */
+}
+
+.explore-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff6699;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  border-radius: 25px;
+  transition: background-color 0.3s;
+}
+
+.explore-button:hover {
+  background-color: pink; /* Lighter pink on hover */
+}
+
+.cake{
+  color: black;
+}
+
+/*Card Css */
+/* Add this to your CSS file or as a style object in your component */
+
+.cake-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cake-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  width: 200px;
+}
+
+.cake-title {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.cake-description {
+  margin-bottom: 8px;
+}
+
+.cake-price {
+  font-weight: bold;
+  color: #28a745; /* Green color */
+}
+
+.cake-quantity {
+  color: #007bff; /* Blue color */
+}
+
+/*Add to cart */
+/* Add this to your CSS file or as a style object in your component */
+
+.add-to-cart-button {
+  background-color: #ff6699; /* Blue color */
+  color: #fff; /* White color */
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.add-to-cart-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Add this CSS to your stylesheet or in a style tag in your component */
+
+.form-container {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  /* width: 100%; */
+  padding: 8px;
+  margin-bottom: 10px;
+  margin-right: 8px;
+  box-sizing: border-box;
+}
+
+.delete-button {
+  background-color:#0056b3; /* Blue color */
+  color: #fff; /* White color */
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-button:hover {
+  background-color: #ff6699; /* Darker blue on hover */
+}
+
+
+
+
+
+
