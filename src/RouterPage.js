@@ -4,6 +4,7 @@ import Landing from './components/Landing';
 import Products from './products';
 import Orders from './components/Orders'
 import AdminPanel from './components/AdminPanel'
+import UpdateProduct from './components/UpdateProduct';
 
 export default function RouterPage(){
     
@@ -14,6 +15,7 @@ export default function RouterPage(){
                 <Route path='/product' element={ <Products /> } />
                 <Route path='/orders' element={ <Orders /> } />
                 <Route path='/admin' element={ <AdminPanel /> } />
+                <Route path='/update-product/:id' element={ <UpdateProduct />} />
                 
 
             </Routes>

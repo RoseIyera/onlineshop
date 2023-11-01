@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Navheader from './Navheader';
+import { useHistory } from 'react-router-dom';
 
 class Products extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class Products extends Component {
     this.state = {
       cakes: [],
       cart: [],
+      isLoading: true,
     };
   }
 
@@ -22,9 +24,15 @@ class Products extends Component {
       const data = await response.json();
       this.setState({
         cakes: data,
+        isLoading: false,
       });
     } catch (error) {
       console.error('Error fetching cakes:', error);
+      alert('Error fetching cakes. Please try again later.');
+      this.setState({
+        error: 'Error fetching cakes. Please try again later.',
+        isLoading: false, // Set isLoading to false in case of an error too
+      });
     }
   };
 

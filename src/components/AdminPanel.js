@@ -1,9 +1,13 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import Navheader from '../Navheader';
+import { useNavigate } from 'react-router-dom';
+
 
 const AdminPanel = () => {
+    const navigate = useNavigate();
     const [cakes, setCakes] = useState([]);
+    const [cakeId, setCakeId] = useState('');
     const [newCake, setNewCake] = useState({
         Id: '',  
         Name: '',
@@ -31,19 +35,24 @@ const AdminPanel = () => {
   
     const handleCreateCake = async () => {
         try {
+          const newCakeWithAutoId = {
+            ...newCake,
+            Id: generateUniqueId(),
+          };
+
           const formData = new FormData();
-          formData.append('Id', newCake.Id); 
-          formData.append('Name', newCake.Name);
-          formData.append('Description', newCake.Description);
-          formData.append('Picture', newCake.Picture);
-          formData.append('Quantity', newCake.Quantity);
-          formData.append('Price', newCake.Price);
+          formData.append('Id', newCakeWithAutoId.Id); 
+          formData.append('Name', newCakeWithAutoId.Name);
+          formData.append('Description', newCakeWithAutoId.Description);
+          formData.append('Picture', newCakeWithAutoId.Picture);
+          formData.append('Quantity', newCakeWithAutoId.Quantity);
+          formData.append('Price', newCakeWithAutoId.Price);
       
       
           await axios.post(`${API_URL}/api/Cake/AddCakes`, formData);
           refreshCakes();
           setNewCake({
-            Id: '',
+            Id:'',
             Name: '',
             Description: '',
             Picture: '',
@@ -54,38 +63,56 @@ const AdminPanel = () => {
           console.error('Error creating product:', error);
         }
       };
+
+      const generateUniqueId = () => {
+        const min = 9;
+        const max = 999999; // You can adjust the maximum value as needed
+        const numericId = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log('Generated ID:', numericId);
+        return numericId;
+      };
       
   
-    const handleUpdateCake = async () => {
+      const handleUpdateCake = async (cakeId) => {
+        try {
+          // Use navigate to redirect to the update page with the cakeId
+          // navigate(`/update-product/${cakeId}`);
+          
+          // Rest of your code for updating the cake
+          const updatedCake = {
+            name: prompt('Enter updated name:', newCake.Name),
+            description: prompt('Enter updated description:', newCake.Description),
+            price: prompt('Enter updated price:', newCake.Price),
+            quantity: prompt('Enter updated quantity:', newCake.Quantity),
+          };
+      
+          await axios.put(`${API_URL}/api/Cake/${cakeId}`, updatedCake);
+          refreshCakes();
+        } catch (error) {
+          console.error('Error updating product:', error);
+        }
+      };
+      
+
+
+
+    const handleDeleteCake = async (cakeId) => {
       try {
-        const updatedCake = {
-          Name: prompt('Enter updated name:', newCake.Name),
-          Description: prompt('Enter updated description:', newCake.Description),
-          Price: prompt('Enter updated price:', newCake.Price),
-          Quantity: prompt('Enter updated quantity:', newCake.Quantity),
-        };
-  
-        await axios.put(`${API_URL}/api/Cake/UpdateCake/${selectedCakeId}`, updatedCake);
-        refreshCakes();
+        const response = await axios.delete(`${API_URL}/api/Cake/DeleteCake?id=${cakeId}`);
+        
+        if (response.status === 200) {
+          console.log('Cake deleted successfully!');
+          // Add any additional logic or state updates here
+        } else {
+          console.log('Cake not found with the given ID');
+          // Handle error or update state accordingly
+        }
       } catch (error) {
-        console.error('Error updating product:', error);
-      } finally {
-        setSelectedCakeId(null);
+        console.error('Error:', error.response.data);
+        // Handle error or update state accordingly
       }
     };
-
-
-
-const handleDeleteCake = async (cakeId) => {
-  try {
-    console.log('Deleting cake with ID:', cakeId);
-    await axios.delete(`${API_URL}/api/Cake/${cakeId}`);
-    console.log('Cake deleted successfully');
-    refreshCakes();
-  } catch (error) {
-    console.error('Error deleting cake:', error);
-  }
-};
+    
 
   return (
     <Fragment>
@@ -123,15 +150,6 @@ const handleDeleteCake = async (cakeId) => {
   <button className="button" onClick={handleCreateCake}>Create Product</button>
 </div>
 
-
-        {/* Update Product Form */}
-        {selectedCakeId && (
-          <div>
-            <h3>Update Product</h3>
-            <button onClick={handleUpdateCake}>Update Product</button>
-          </div>
-        )}
-
         {/* Product List */}
         <div>
           <h3>Product List</h3>
@@ -143,8 +161,8 @@ const handleDeleteCake = async (cakeId) => {
                   <p>{cake.Description}</p>
                   <p>Price: {cake.Price}</p>
                   <p>Quantity: {cake.Quantity}</p>
-                  <button className="add-to-cart-button" onClick={() => setSelectedCakeId(cake.id)}>Update</button>
-                  <button className="delete-button"  onClick={() => handleDeleteCake(cake.id)}>Delete</button>
+                  <button className="add-to-cart-button" onClick={() => handleUpdateCake(cake.Id)}>Update</button>
+                  <button className="delete-button" onClick={() => handleDeleteCake(cake.Id)}>Delete</button>
                 </div>
               </div>
             ))}
